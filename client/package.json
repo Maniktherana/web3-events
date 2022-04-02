@@ -1,10 +1,10 @@
 {
-  "name": "mern-stack-client",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://memories-project-part4.herokuapp.com/",
+  "proxy": "http://localhost:3000",
   "dependencies": {
-   
+    "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",

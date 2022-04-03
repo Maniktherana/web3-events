@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 
-const CONNECTION_URL = '';
+const CONNECTION_URL = 'mongodb+srv://fullstackManik1:manik1@cluster0.wejhw.mongodb.net/web3events?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 3000;
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

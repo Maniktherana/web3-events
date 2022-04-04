@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Avatar, Paper, Button, Grid, Typography, Container } from '@material-ui/core';
+import { GoogleLogin } from 'react-google-login';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
+import Icon from './icon'
 
 export const Auth = () => {
     const classes = useStyles();
@@ -23,6 +25,14 @@ export const Auth = () => {
 
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
+    };
+
+    const googleSuccess = (res) => {
+        console.log(res)
+    };
+
+    const googleFailure = () => {
+        console.log('failure to login');
     };
 
     return (
@@ -47,6 +57,17 @@ export const Auth = () => {
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
                         { isSignup && (<Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />) }
                     </Grid>
+                    <GoogleLogin 
+                        clientId="GOOGLE ID"
+                        render={(renderProps) => (
+                            <Button className={classes.googleButton} color='primary'  variant='contained' fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon / >}>
+                                Google Sign in
+                            </Button>
+                        )}
+                        onSuccess={googleSuccess}
+                        onFailure={googleFailure}
+                        cookiePolicy={'single_host_origin'}
+                    />
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>

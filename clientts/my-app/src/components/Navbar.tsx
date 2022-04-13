@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { createStyles, Header, Group, ActionIcon, Container, Burger, Title } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
-import { BrandTwitter, BrandYoutube, BrandInstagram, BrandGithub } from 'tabler-icons-react';
-import { MantineLogo } from '../shared/MantineLogo';
+import { GitHubLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 import LightDarkButton from './LightDarkButton';
 
 const useStyles = createStyles((theme) => ({
@@ -32,12 +31,17 @@ const useStyles = createStyles((theme) => ({
   },
 
   social: {
-    width: 260,
+    width: 280,
 
     [theme.fn.smallerThan('sm')]: {
-      width: 'auto',
-      marginLeft: 'auto',
+      display: 'none',
     },
+  },
+
+  toggle: {
+    [theme.fn.smallerThan('sm')]: {
+        marginLeft: 'auto',
+      },
   },
 
   burger: {
@@ -114,14 +118,16 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
           <ActionIcon size="lg">
-            <BrandTwitter size={18} />
+            <TwitterLogoIcon />
           </ActionIcon>
           <ActionIcon size="lg">
-            <BrandGithub size={18} />
+            <GitHubLogoIcon />
           </ActionIcon>
         </Group>
 
-        <LightDarkButton />
+        <Group className={classes.toggle} spacing={0} position="right">
+            <LightDarkButton />
+        </Group>
       </Container>
     </Header>
   );

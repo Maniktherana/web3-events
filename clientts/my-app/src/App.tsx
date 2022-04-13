@@ -4,7 +4,6 @@ import { Paper } from '@mantine/core';
 import { HeaderMiddle } from './components/Navbar';
 import { linksItems } from './components/mockdata';
 import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
-import LightDarkButton from './components/LightDarkButton';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 
 

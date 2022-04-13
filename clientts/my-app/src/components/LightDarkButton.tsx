@@ -1,20 +1,25 @@
 import React from 'react'
-import { ActionIcon, useMantineColorScheme } from '@mantine/core';
-import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
+import { ThemeIcon, useMantineColorScheme } from '@mantine/core';
+import { Sun, Moon } from 'tabler-icons-react';
 
 const LightDarkButton = () => {
     const { colorScheme, toggleColorScheme } = useMantineColorScheme();
     const dark = colorScheme === 'dark';
     
   return (
-    <ActionIcon
-      variant="outline"
-      color={dark ? 'yellow' : 'blue'}
-      onClick={() => toggleColorScheme()}
-      title="Toggle color scheme"
+    <ThemeIcon 
+    radius="md" 
+    size="lg" 
+    sx={(theme) => ({
+        backgroundColor: theme.colors.dark[4],
+        '&:hover': {
+          backgroundColor: theme.colors.dark[3],
+        },
+      })}
+    onClick={() => toggleColorScheme()}
     >
-      {dark ? <SunIcon /> : <MoonIcon />}
-    </ActionIcon>
+      {dark ? <Sun size={22} /> : <Moon size={18} />}
+    </ThemeIcon>
   )
 }
 

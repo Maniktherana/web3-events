@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { createStyles, Header, Group, ActionIcon, Container, Burger, Title } from '@mantine/core';
-import { useBooleanToggle } from '@mantine/hooks';
-import { GitHubLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
+import { createStyles, Header, Group, ThemeIcon, Container, Title, useMantineColorScheme } from '@mantine/core';
+import { BrandTwitter, BrandGithub } from 'tabler-icons-react';
 import LightDarkButton from './LightDarkButton';
+import { openInNewTab } from './Helper';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -18,10 +18,6 @@ const useStyles = createStyles((theme) => ({
 
   links: {
     width: 260,
-
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
-    },
   },
 
   Title: {
@@ -34,20 +30,6 @@ const useStyles = createStyles((theme) => ({
     width: 280,
 
     [theme.fn.smallerThan('sm')]: {
-      display: 'none',
-    },
-  },
-
-  toggle: {
-    [theme.fn.smallerThan('sm')]: {
-        marginLeft: 'auto',
-      },
-  },
-
-  burger: {
-    marginRight: theme.spacing.md,
-
-    [theme.fn.largerThan('sm')]: {
       display: 'none',
     },
   },
@@ -83,9 +65,11 @@ interface HeaderMiddleProps {
 }
 
 export function HeaderMiddle({ links }: HeaderMiddleProps) {
-  const [opened, toggleOpened] = useBooleanToggle(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
 
   const items = links.map((link) => (
     <a
@@ -104,30 +88,42 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
   return (
     <Header height={56} mb={120}>
       <Container className={classes.inner}>
-        <Burger
-          opened={opened}
-          onClick={() => toggleOpened()}
-          size="sm"
-          className={classes.burger}
-        />
         <Group className={classes.links} spacing={5}>
           {items}
         </Group>
 
-        <Title order={1}>Web3 Events</Title>
+        <Title order={2}>Web3 Events</Title>
 
-        <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <TwitterLogoIcon />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <GitHubLogoIcon />
-          </ActionIcon>
+        <Group spacing={7} className={classes.social} position="right" noWrap>
+            <ThemeIcon 
+            radius="md" 
+            size="lg" 
+            sx={(theme) => ({
+                backgroundColor: theme.colors.dark[4],
+                '&:hover': {
+                backgroundColor: theme.colors.dark[3],
+                },
+            })}
+            onClick={() => openInNewTab("https://twitter.com/ManaMkr")}
+            >
+                <BrandTwitter size={18} />
+            </ThemeIcon>
+            <ThemeIcon 
+                radius="md" 
+                size="lg" 
+                sx={(theme) => ({
+                    backgroundColor: theme.colors.dark[4],
+                    '&:hover': {
+                    backgroundColor: theme.colors.dark[3],
+                    },
+                })}
+                onClick={() => openInNewTab("https://github.com/Maniktherana/web3-events")}
+            >
+                <BrandGithub size={18} />
+            </ThemeIcon>
+                <LightDarkButton />
         </Group>
 
-        <Group className={classes.toggle} spacing={0} position="right">
-            <LightDarkButton />
-        </Group>
       </Container>
     </Header>
   );

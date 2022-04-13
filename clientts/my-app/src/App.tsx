@@ -5,6 +5,7 @@ import { HeaderMiddle } from './components/Navbar';
 import { linksItems } from './components/mockdata';
 import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { FooterSocial } from './components/Footer';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <MantineProvider theme={{colorScheme}}>
             <Paper radius={0} style={{minHeight: "100vh"}}>
               <HeaderMiddle links={linksItems} />
+              <FooterSocial />
             </Paper>
           </MantineProvider>
         </ColorSchemeProvider>
